@@ -35,10 +35,9 @@
     self.navigationItem.rightBarButtonItem = cancelBarBtn;
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 0, 255, 44)];
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 0, 245, 44)];
     searchBar.delegate = self;
     searchBar.placeholder = @"输入要查找的城市名";
-    [searchBar sizeToFit];
     [self.navigationController.navigationBar addSubview:searchBar];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
