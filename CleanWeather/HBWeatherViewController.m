@@ -15,19 +15,23 @@
 #import "MJRefresh.h"
 #import "UILabel+HBLabel.h"
 #import "HBDownloadWeather.h"
+#import "HBAboutViewController.h"
+#import "CleanWeather-Swift.h"
 
 #define SCREEN_WIDTH self.view.bounds.size.width
 #define SCREEN_HEIGHT self.view.bounds.size.height
 
-@interface HBWeatherViewController () <HBCityDelegate> {
+@interface HBWeatherViewController () <HBCityDelegate,UIViewControllerTransitioningDelegate> {
     UILabel *_cityLabel;
     UIView *_footView;
     UIPageControl *_pageControl;
 }
 
 @property (nonatomic,strong) HBWeatherView *weatherView;
-
 @property (nonatomic,strong) HBWeatherInfo *weatherInfo;
+
+@property (nonatomic,strong) BubbleTransition *transition;
+@property (nonatomic,strong) UIButton *aboutInfoBtn;
 
 @end
 
@@ -82,12 +86,19 @@
     _footView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_footView];
     
+    self.aboutInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.aboutInfoBtn.frame = CGRectMake(15, 5, 20, 20);
+    [self.aboutInfoBtn setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
+    [self.aboutInfoBtn setImage:[UIImage imageNamed:@"info_highlight"] forState:UIControlStateHighlighted];
+    [self.aboutInfoBtn addTarget:self action:@selector(showAboutInfo) forControlEvents:UIControlEventTouchUpInside];
+    [_footView addSubview:self.aboutInfoBtn];
+    
     _pageControl = [[UIPageControl alloc] init];
-    _pageControl.frame = CGRectMake(10, 5, 300, 20);
+    _pageControl.frame = CGRectMake(40, 5, 240, 20);
     [_footView addSubview:_pageControl];
     
     UIButton *cityInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cityInfoBtn.frame = CGRectMake(SCREEN_WIDTH - 40, 5, 20, 20);
+    cityInfoBtn.frame = CGRectMake(SCREEN_WIDTH - 35, 5, 20, 20);
     [cityInfoBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
     [cityInfoBtn setImage:[UIImage imageNamed:@"menu_highlight"] forState:UIControlStateHighlighted];
     [cityInfoBtn addTarget:self action:@selector(showCityInfoTable) forControlEvents:UIControlEventTouchUpInside];
@@ -109,10 +120,6 @@
     
     _pageControl.numberOfPages = [[[HBCityStore sharedStore] allCitys] count];
     _pageControl.currentPage = [[[HBCityStore sharedStore] allCitys] indexOfObjectIdenticalTo:city];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -191,30 +198,19 @@
     }
 }
 
+- (BOOL)saveWeatherInfo:(HBWeatherInfo *)weatherInfo forCity:(NSString *)city{
+    NSString *singleCityPath = [[HBCityStore sharedStore] singleCityWeatherPath:city];
+    NSLog(@"singleCityPath = %@",singleCityPath);
+    
+    return [NSKeyedArchiver archiveRootObject:weatherInfo toFile:singleCityPath];
+}
+
 - (void)changeCity:(UISwipeGestureRecognizer *)gesture{
     if (gesture.direction == UISwipeGestureRecognizerDirectionRight) {
         [self transitionAnimation:NO];
     } else if (gesture.direction == UISwipeGestureRecognizerDirectionLeft) {
         [self transitionAnimation:YES];
     }
-}
-
-- (void)swipeToChangeCity:(BOOL)isNext{
-    NSArray *allCitys = [[HBCityStore sharedStore] allCitys];
-    
-    int currentIndex = (int)_pageControl.currentPage;
-    
-    int index;
-    if (isNext) {
-        index = (currentIndex + (int)[allCitys count] + 1) % (int)[allCitys count];
-    } else {
-        index = (currentIndex + (int)[allCitys count] - 1) % (int)[allCitys count];
-    }
-    
-    _pageControl.currentPage = index;
-    
-    NSString *city = allCitys[index];
-    _cityLabel.text = city;
 }
 
 //转场动画
@@ -238,6 +234,24 @@
     [_weatherView.layer addAnimation:transition forKey:@"transitionAnimation"];
 }
 
+- (void)swipeToChangeCity:(BOOL)isNext{
+    NSArray *allCitys = [[HBCityStore sharedStore] allCitys];
+    
+    int currentIndex = (int)_pageControl.currentPage;
+    
+    int index;
+    if (isNext) {
+        index = (currentIndex + (int)[allCitys count] + 1) % (int)[allCitys count];
+    } else {
+        index = (currentIndex + (int)[allCitys count] - 1) % (int)[allCitys count];
+    }
+    
+    _pageControl.currentPage = index;
+    
+    NSString *city = allCitys[index];
+    _cityLabel.text = city;
+}
+
 - (void)showCityInfoTable{
     HBSavedCityViewController *savedCityVC = [[HBSavedCityViewController alloc] init];
     savedCityVC.delegate = self;
@@ -245,11 +259,34 @@
     [self presentViewController:navController animated:YES completion:nil];
 }
 
-- (BOOL)saveWeatherInfo:(HBWeatherInfo *)weatherInfo forCity:(NSString *)city{
-    NSString *singleCityPath = [[HBCityStore sharedStore] singleCityWeatherPath:city];
-    NSLog(@"singleCityPath = %@",singleCityPath);
+- (void)showAboutInfo{
+    HBAboutViewController *aboutVC = [[HBAboutViewController alloc] init];
+    aboutVC.transitioningDelegate = self;
+    aboutVC.modalPresentationStyle = UIModalPresentationCustom;
     
-    return [NSKeyedArchiver archiveRootObject:weatherInfo toFile:singleCityPath];
+    [self presentViewController:aboutVC animated:YES completion:nil];
+}
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+    self.transition.transitionMode = BubbleTransitionModePresent;
+    self.transition.startingPoint = CGPointMake(25, SCREEN_HEIGHT - 15);
+    self.transition.bubbleColor = [UIColor whiteColor];
+    return self.transition;
+}
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
+    self.transition.transitionMode = BubbleTransitionModeDismiss;
+    self.transition.startingPoint = CGPointMake(25, SCREEN_HEIGHT - 15);
+    self.transition.bubbleColor = [UIColor whiteColor];
+    return self.transition;
+}
+
+- (BubbleTransition *)transition{
+    if (!_transition) {
+        _transition = [[BubbleTransition alloc] init];
+    }
+    
+    return _transition;
 }
 
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A2088841FA8BD6E0008EBAB /* BubbleTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2088831FA8BD6D0008EBAB /* BubbleTransition.swift */; };
+		9A2088871FA8BE230008EBAB /* HBAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2088861FA8BE230008EBAB /* HBAboutViewController.m */; };
+		9A20888A1FA8BE350008EBAB /* UIImage+HBImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2088891FA8BE350008EBAB /* UIImage+HBImage.m */; };
 		9A7C8C341F655D33008B0D9E /* UILabel+HBLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C8C331F655D33008B0D9E /* UILabel+HBLabel.m */; };
 		D00504A01F67728700871F20 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D00504961F67728700871F20 /* FMDatabase.m */; };
 		D00504A11F67728700871F20 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D00504981F67728700871F20 /* FMDatabaseAdditions.m */; };
@@ -61,6 +64,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A2088821FA8BD6C0008EBAB /* CleanWeather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CleanWeather-Bridging-Header.h"; sourceTree = "<group>"; };
+		9A2088831FA8BD6D0008EBAB /* BubbleTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTransition.swift; sourceTree = "<group>"; };
+		9A2088851FA8BE220008EBAB /* HBAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBAboutViewController.h; sourceTree = "<group>"; };
+		9A2088861FA8BE230008EBAB /* HBAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBAboutViewController.m; sourceTree = "<group>"; };
+		9A2088881FA8BE350008EBAB /* UIImage+HBImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+HBImage.h"; sourceTree = "<group>"; };
+		9A2088891FA8BE350008EBAB /* UIImage+HBImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HBImage.m"; sourceTree = "<group>"; };
 		9A7C8C321F655D33008B0D9E /* UILabel+HBLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HBLabel.h"; sourceTree = "<group>"; };
 		9A7C8C331F655D33008B0D9E /* UILabel+HBLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HBLabel.m"; sourceTree = "<group>"; };
 		D00504951F67728700871F20 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -316,15 +325,21 @@
 				D0C464601F5EA3350060B1DD /* HBSavedCityViewController.m */,
 				D0C464621F5EA3E20060B1DD /* HBAddCityViewController.h */,
 				D0C464631F5EA3E20060B1DD /* HBAddCityViewController.m */,
+				9A2088831FA8BD6D0008EBAB /* BubbleTransition.swift */,
+				9A2088851FA8BE220008EBAB /* HBAboutViewController.h */,
+				9A2088861FA8BE230008EBAB /* HBAboutViewController.m */,
 				D0C464C31F5FD6F10060B1DD /* DBManager.h */,
 				D0C464C41F5FD6F10060B1DD /* DBManager.m */,
 				9A7C8C321F655D33008B0D9E /* UILabel+HBLabel.h */,
 				9A7C8C331F655D33008B0D9E /* UILabel+HBLabel.m */,
+				9A2088881FA8BE350008EBAB /* UIImage+HBImage.h */,
+				9A2088891FA8BE350008EBAB /* UIImage+HBImage.m */,
 				D0C464651F5F8A230060B1DD /* Assets.xcassets */,
 				D0B0AB801F6A6B12004D5399 /* APIKEY */,
 				D0C464311F5E37BB0060B1DD /* Info.plist */,
 				D02DC6961F5FF88200E6B7E3 /* Weather.sqlite */,
 				D0C464201F5E37BB0060B1DD /* Supporting Files */,
+				9A2088821FA8BD6C0008EBAB /* CleanWeather-Bridging-Header.h */,
 			);
 			path = CleanWeather;
 			sourceTree = "<group>";
@@ -403,6 +418,7 @@
 				TargetAttributes = {
 					D0C4641C1F5E37BB0060B1DD = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					D0C464351F5E37BB0060B1DD = {
@@ -457,6 +473,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A2088841FA8BD6E0008EBAB /* BubbleTransition.swift in Sources */,
 				D0C4645E1F5EA2660060B1DD /* HBCityStore.m in Sources */,
 				D00504D91F67729A00871F20 /* MJRefreshAutoGifFooter.m in Sources */,
 				D00504E11F67729A00871F20 /* MJRefreshStateHeader.m in Sources */,
@@ -479,12 +496,14 @@
 				D00504DA1F67729A00871F20 /* MJRefreshAutoNormalFooter.m in Sources */,
 				D0C4644D1F5E3EBB0060B1DD /* HBWeatherView.m in Sources */,
 				D0C464531F5E424E0060B1DD /* HBWeatherInfo.m in Sources */,
+				9A20888A1FA8BE350008EBAB /* UIImage+HBImage.m in Sources */,
 				D00504D51F67729A00871F20 /* MJRefreshBackFooter.m in Sources */,
 				D00504D71F67729A00871F20 /* MJRefreshFooter.m in Sources */,
 				D00504E61F67729A00871F20 /* UIScrollView+MJRefresh.m in Sources */,
 				D00504A01F67728700871F20 /* FMDatabase.m in Sources */,
 				D00504D81F67729A00871F20 /* MJRefreshHeader.m in Sources */,
 				D00504DD1F67729A00871F20 /* MJRefreshBackNormalFooter.m in Sources */,
+				9A2088871FA8BE230008EBAB /* HBAboutViewController.m in Sources */,
 				D0B0AB841F6A6C63004D5399 /* HBDownloadWeather.m in Sources */,
 				D00504D61F67729A00871F20 /* MJRefreshComponent.m in Sources */,
 				D0C464641F5EA3E20060B1DD /* HBAddCityViewController.m in Sources */,
@@ -621,10 +640,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = CleanWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RoyCtd.CleanWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CleanWeather/CleanWeather-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -633,16 +657,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = CleanWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RoyCtd.CleanWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CleanWeather/CleanWeather-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		D0C464431F5E37BB0060B1DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = CleanWeatherUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RoyCtd.CleanWeatherUITests;
@@ -654,6 +683,7 @@
 		D0C464441F5E37BB0060B1DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = CleanWeatherUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RoyCtd.CleanWeatherUITests;
