@@ -5,11 +5,9 @@
 用到的第三方库有：  
 1. [MJRefresh](https://github.com/CoderMJLee/MJRefresh)  
 2. [fmdb](https://github.com/ccgus/fmdb)  
+3. [BubbleTransition](https://github.com/andreamazz/BubbleTransition)  
 
-MJRefresh用来实现下拉刷新功能，查询数据库则用的是fmdb。
+MJRefresh用来实现下拉刷新功能，查询数据库则用的是fmdb。BubbleTransition用于转场，因为这个库是Swift版本的，所以是用OC去调用Swift。
 
-#### 截图1
-![ScreenShot1](https://github.com/roygt/CleanWeather/raw/master/ScreenShot1.png)
-
-#### 截图2
-![ScreenShot2](https://github.com/roygt/CleanWeather/raw/master/ScreenShot2.png)
+#### 截图
+![ScreenShot](https://github.com/roygt/CleanWeather/raw/master/ScreenShot.png)
